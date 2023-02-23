@@ -36,5 +36,15 @@ public class TestebancoJdbc {
 		UserPosJava userPosJava = dao.findById(4L);
 		System.out.println(userPosJava);
 	}
+	
+	@Test
+	public void initAlterName() throws Exception {
+		UserPosJavaDao dao = new UserPosJavaDao();
+		UserPosJava userPosJava = dao.findById(4L);
+		userPosJava.setNome("Margarida Almeida");
+		dao.update(userPosJava);
+		
+		System.out.println(userPosJava);
+	}
 
 }

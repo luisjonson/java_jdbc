@@ -64,4 +64,17 @@ public class UserPosJavaDao {
 		}
 		return retorno;
 	}
+	
+	public void update(UserPosJava userPosJava) throws SQLException {
+		String sql = "update userposjava set nome = ? where id = " + userPosJava.getId();
+		try {
+			PreparedStatement stament = connection.prepareStatement(sql);
+			stament.setString(1, userPosJava.getNome());
+			stament.execute();
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			e.printStackTrace();
+		}
+	}
 }
