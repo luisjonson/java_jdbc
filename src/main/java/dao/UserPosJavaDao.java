@@ -20,12 +20,11 @@ public class UserPosJavaDao {
 	}
 	
 	public void salvar(UserPosJava posJava) throws SQLException {
-		String sql = "insert into userposjava (id, nome, email) values (?,?,?)";
+		String sql = "insert into userposjava (nome, email) values (?,?)";
 		PreparedStatement insert = connection.prepareStatement(sql);
 		try {
-			insert.setLong(1, posJava.getId());
-			insert.setString(2, posJava.getNome());
-			insert.setString(3, posJava.getEmail());
+			insert.setString(1, posJava.getNome());
+			insert.setString(2, posJava.getEmail());
 			insert.execute();
 			connection.commit();
 		} catch (SQLException e) {
