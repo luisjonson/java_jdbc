@@ -3,7 +3,10 @@ package dao;
 import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import conexaojdbc.SingleConnection;
 import model.UserPosJava;
@@ -29,5 +32,36 @@ public class UserPosJavaDao {
 			connection.rollback();
 			e.printStackTrace();
 		}
+	}
+	
+	public List<UserPosJava> findAll() throws Exception{
+		List<UserPosJava> list = new ArrayList<>();
+		String sql = "select * from userposjava";
+		PreparedStatement stament = connection.prepareStatement(sql);
+		ResultSet resultSet = stament.executeQuery();
+		while (resultSet.next()) {
+			UserPosJava userPosJava = new UserPosJava();
+			userPosJava.setId(resultSet.getLong("Id"));
+			userPosJava.setNome(resultSet.getString("nome"));
+			userPosJava.setEmail(resultSet.getString("email"));
+			
+			list.add(userPosJava);
+		}
+		return list;
+	}
+	
+	public UserPosJava findById(Long id) throws Exception {
+		UserPosJava retorno = new UserPosJava();
+		String sql = "select * from userposjava where id = " + id;
+
+		PreparedStatement stament = connection.prepareStatement(sql);
+		ResultSet resultSet = stament.executeQuery();
+
+		while (resultSet.next()) {
+			retorno.setId(resultSet.getLong("Id"));
+			retorno.setNome(resultSet.getString("nome"));
+			retorno.setEmail(resultSet.getString("email"));
+		}
+		return retorno;
 	}
 }
