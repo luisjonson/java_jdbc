@@ -76,4 +76,16 @@ public class UserPosJavaDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void delete(UserPosJava userPosJava) throws SQLException {
+		String sql = "delete from userposjava where id = " + userPosJava.getId();
+		try {
+			PreparedStatement stament = connection.prepareStatement(sql);
+			stament.execute();
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			e.printStackTrace();
+		}
+	}
 }

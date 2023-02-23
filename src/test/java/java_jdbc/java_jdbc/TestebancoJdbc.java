@@ -46,5 +46,14 @@ public class TestebancoJdbc {
 		
 		System.out.println(userPosJava);
 	}
+	
+	@Test
+	public void initDelete() throws Exception {
+		UserPosJavaDao dao = new UserPosJavaDao();
+		UserPosJava userPosJava = dao.findById(4L);
+		dao.delete(userPosJava);
+		
+		System.out.println(userPosJava);
+	}
 
 }
