@@ -1,11 +1,13 @@
 package java_jdbc.java_jdbc;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import dao.UserPosJavaDao;
+import model.BeanUserFone;
 import model.Telefone;
 import model.UserPosJava;
 
@@ -68,5 +70,12 @@ public class TestebancoJdbc {
 			e.printStackTrace();
 		}
 	}
-
+	
+	@Test
+	public void testeCarregaFoneUser() {
+		UserPosJavaDao dao = new UserPosJavaDao();
+		List<BeanUserFone> beanUserFones = dao.listaUserFone(8L);
+		
+		beanUserFones.forEach(System.out::print);
+	}
 }
