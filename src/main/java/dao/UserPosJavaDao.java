@@ -1,6 +1,5 @@
 package dao;
 
-import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.Telefone;
 import model.UserPosJava;
 
 public class UserPosJavaDao {
@@ -30,6 +30,22 @@ public class UserPosJavaDao {
 		} catch (SQLException e) {
 			connection.rollback();
 			e.printStackTrace();
+		}
+	}
+	
+	public void salvarTelefone(Telefone telefone) throws SQLException {
+		try {
+			String sql = "INSERT INTO public.telefone(\r\n"
+					+ "             numero, tipo, usuariopessoa)\r\n"
+					+ "    VALUES ( ?, ?, ?);";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, telefone.getNumero());
+			statement.setString(2, telefone.getTipo());
+			statement.setLong(3, telefone.getUsuario());
+			statement.execute();
+			connection.commit();
+		} catch (Exception e) {
+			connection.rollback();
 		}
 	}
 	
@@ -78,8 +94,8 @@ public class UserPosJavaDao {
 	}
 	
 	public void delete(UserPosJava userPosJava) throws SQLException {
-		String sql = "delete from userposjava where id = " + userPosJava.getId();
 		try {
+			String sql = "delete from userposjava where id = " + userPosJava.getId();
 			PreparedStatement stament = connection.prepareStatement(sql);
 			stament.execute();
 			connection.commit();

@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import dao.UserPosJavaDao;
+import model.Telefone;
 import model.UserPosJava;
 
 public class TestebancoJdbc {
@@ -54,6 +55,18 @@ public class TestebancoJdbc {
 		dao.delete(userPosJava);
 		
 		System.out.println(userPosJava);
+	}
+	
+	@Test
+	public void testeTelefone() {
+		UserPosJavaDao dao = new UserPosJavaDao();
+		Telefone telefone = new Telefone("(82) 9 9989-8787", "celular", 8L);
+		System.out.println("telefone salvo com sucesso");
+		try {
+			dao.salvarTelefone(telefone);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
