@@ -1,7 +1,6 @@
 package java_jdbc.java_jdbc;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -77,5 +76,11 @@ public class TestebancoJdbc {
 		List<BeanUserFone> beanUserFones = dao.listaUserFone(8L);
 		
 		beanUserFones.forEach(System.out::print);
+	}
+	
+	@Test
+	public void testeDEleteUserFone() {
+		UserPosJavaDao dao = new UserPosJavaDao();
+		dao.deleteFonesPorUser(8L);
 	}
 }
